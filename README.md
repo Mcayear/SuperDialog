@@ -4,7 +4,7 @@
 
 ## 预览
 
-![preview](https://gh.api.99988866.xyz/https://github.com/Mcayear/SuperDialog/blob/master/image/preview.gif)
+![preview](./image/preview.gif)
 
 ## 快速开始
 
