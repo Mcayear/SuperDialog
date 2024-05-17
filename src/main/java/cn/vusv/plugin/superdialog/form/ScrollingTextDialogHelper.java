@@ -57,8 +57,8 @@ public class ScrollingTextDialogHelper {
             }, 6);
         });
 
-        //ScrollingTextDialog form = new ScrollingTextDialog(player, dialog, 1);
-        dialog.send(player);
+        ScrollingTextDialog form = new ScrollingTextDialog(player, dialog, 1);
+        form.send(player);
     }
     public static void close(Player player, FormResponseDialog response) {
         NPCDialoguePacket closeWindowPacket = new NPCDialoguePacket();

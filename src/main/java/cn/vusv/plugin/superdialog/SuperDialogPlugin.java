@@ -1,5 +1,6 @@
 package cn.vusv.plugin.superdialog;
 
+import cn.nukkit.Server;
 import cn.nukkit.lang.PluginI18n;
 import cn.nukkit.lang.PluginI18nManager;
 import cn.nukkit.plugin.PluginBase;

@@ -13,7 +13,7 @@ website: https://github.com/Mcayear/SuperDialog
 # These dependencies are required for the plugin to start.
 #depend: ["OtherPlugin", "ThisPlugin"]
 # These dependencies are not required.
-softdepend: []
+softdepend: ["NInvShop"]
 # Log prefix in console
 prefix: "SuperDialog"
 # Plugin will be loaded before these. Any cyclic loadbefore's or dependencies's will throw errors!

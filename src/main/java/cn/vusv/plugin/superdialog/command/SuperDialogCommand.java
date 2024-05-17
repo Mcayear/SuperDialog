@@ -7,8 +7,8 @@ import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
 import cn.vusv.plugin.superdialog.SuperDialogPlugin;
-import cn.vusv.plugin.superdialog.config.LuaShareVarable;
-import cn.vusv.plugin.superdialog.config.LuaToolsVarable;
+import cn.vusv.plugin.superdialog.config.LuaShareVariable;
+import cn.vusv.plugin.superdialog.config.LuaToolsVariable;
 import cn.vusv.plugin.superdialog.config.PlayerConfig;
 import cn.vusv.plugin.superdialog.form.ScrollingTextDialogHelper;
 import org.luaj.vm2.Globals;
@@ -68,6 +68,9 @@ public class SuperDialogCommand extends Command {
         try {
             switch (args.get(0)) {
                 case "open":
+                    if (commandSender.isPlayer()) {// 执行者只能是：非玩家的实体
+                        return false;
+                    }
                     Player player = Server.getInstance().getPlayer(args.get(1));
                     if (player == null) {
                         SuperDialogPlugin.getInstance().getLogger().info("玩家" + args.get(1) + "不在线");
@@ -77,7 +80,7 @@ public class SuperDialogCommand extends Command {
                     openDialog(player, commandSender, luaFileName);
                     break;
                 case "value":
-                    var cfg = new LuaShareVarable(args.get(1));
+                    var cfg = new LuaShareVariable(args.get(1));
                     var after = cfg.getStringValue(args.get(3));
                     if (args.size() == 4) {
                         cfg.removeValue(args.get(3));
@@ -128,8 +131,8 @@ public class SuperDialogCommand extends Command {
             LuaValue luaEntity = CoerceJavaToLua.coerce(commandSender.asEntity());
             globals.set("player", luaPlayer);
             globals.set("entity", luaEntity);
-            globals.set("share", CoerceJavaToLua.coerce(new LuaShareVarable(player.getName())));
-            globals.set("tools", CoerceJavaToLua.coerce(LuaToolsVarable.class));
+            globals.set("share", CoerceJavaToLua.coerce(new LuaShareVariable(player.getName())));
+            globals.set("tools", CoerceJavaToLua.coerce(LuaToolsVariable.class));
 
             LuaValue result = defaultDialog.call();
             ScrollingTextDialogHelper.createAndSendDialog(player, commandSender.asEntity(), result, globals);
@@ -149,8 +152,8 @@ public class SuperDialogCommand extends Command {
     private void showHelp(CommandSender sender) {
         sender.sendMessage("SuperDialogCommand Help:");
         sender.sendMessage("/supernpc value <player> <typeEnum: string, int, boolean> <data> - Open a dialog for a player");
-        sender.sendMessage("/supernpc open <player> <dialog> - Open a dialog for a player");
-        sender.sendMessage("/supernpc change <player> <dialog> - Change the dialog for a player");
+        sender.sendMessage("/supernpc open <player> <scenes> - Open a dialog for a player");
+        sender.sendMessage("/supernpc change <player> <scenes> - Change the dialog for a player");
         sender.sendMessage("/supernpc reload - Reload Lua scripts");
         sender.sendMessage("/supernpc help - Show this help message");
     }
