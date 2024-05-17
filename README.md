@@ -4,7 +4,7 @@
 
 ## 预览
 
-![preview](./image/preview.gif)
+![preview](https://gh.api.99988866.xyz/https://github.com/Mcayear/SuperDialog/blob/master/image/preview.gif)
 
 ## 快速开始
 
@@ -81,3 +81,6 @@ share 是玩家的数据文件，它会以玩家名字被持久化保存到服�
 
 我们只提供了基础的 int、string、boolean 类型的读写方法。
 
+## 鸣谢
+
+[gh-proxy](https://github.com/hunshcn/gh-proxy)：提供 gif 图片 proxy CDN
