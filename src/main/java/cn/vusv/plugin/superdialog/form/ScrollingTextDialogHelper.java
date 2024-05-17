@@ -1,4 +1,4 @@
-package cn.vusv.plugin.form;
+package cn.vusv.plugin.superdialog.form;
 
 import cn.nukkit.Player;
 import cn.nukkit.Server;
@@ -8,13 +8,11 @@ import cn.nukkit.form.response.FormResponseDialog;
 import cn.nukkit.form.window.FormWindowDialog;
 import cn.nukkit.form.window.ScrollingTextDialog;
 import cn.nukkit.network.protocol.NPCDialoguePacket;
-import cn.vusv.plugin.SuperDialogPlugin;
+import cn.vusv.plugin.superdialog.SuperDialogPlugin;
 import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.lib.jse.CoerceJavaToLua;
-
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class ScrollingTextDialogHelper {
 
@@ -32,7 +30,7 @@ public class ScrollingTextDialogHelper {
             dialog.addButton(new ElementDialogButton(text, text, null, ElementDialogButton.Mode.BUTTON_MODE));
         }
 
-        dialog.addHandler((player_, response) -> {
+        dialog.addHandler((player_, response) -> {// "EXECUTE_CLOSING_COMMANDS"
             if (!response.getRequestType().name().equals("EXECUTE_ACTION")) return;
             int index = dialog.getButtons().stream()
                     .map(ElementDialogButton::getText)
@@ -53,12 +51,10 @@ public class ScrollingTextDialogHelper {
                         createAndSendDialog(player, entity, actionResult, globals);
                     } else {
                         LuaValue closeAction = globals.get("close");
-                        if (!closeAction.isnil()) {
-                            LuaValue closeActionResult = closeAction.call();
-                        }
+                        if (!closeAction.isnil()) closeAction.call();
                     }
                 }
-            }, 7);
+            }, 6);
         });
 
         //ScrollingTextDialog form = new ScrollingTextDialog(player, dialog, 1);

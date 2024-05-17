@@ -1,4 +1,4 @@
-package cn.vusv.plugin.form;
+package cn.vusv.plugin.superdialog.form;
 
 import cn.nukkit.Player;
 import cn.nukkit.entity.Entity;
